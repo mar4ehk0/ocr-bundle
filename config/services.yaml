@@ -1,0 +1,26 @@
+parameters:
+  bundle_dir: '%kernel.project_dir%/bundles/OCRBundle'
+  path_to_yandex_authorized_key: '%bundle_dir%/config/yandex/yandex_authorized_key.json'
+  yandex_iam_token_v1_url: '%env(YANDEX_IAM_TOKEN_V1_URL)%'
+  yandex_x__folder__id: '%env(YANDEX_X__FOLDER__ID)%'
+  yandex_recognize_text_v1_url: '%env(YANDEX_RECOGNIZE_TEXT_V1_URL)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      $pathToYandexAuthorizedKey: '%path_to_yandex_authorized_key%'
+      $yandexIamTokenV1Url: '%yandex_iam_token_v1_url%'
+      $yandexXFolderId: '%yandex_x__folder__id%'
+      $yandexRecognizeTextV1Url: '%yandex_recognize_text_v1_url%'
+
+  mar4ehk0\OCRBundle\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/*/Entity/'
+
+  mar4ehk0\OCRBundle\Yandex\Repository\IAMTokenRepository: ~
+#  mar4ehk0\OCRBundle\RecognizerClientInterface:
+#    class: mar4ehk0\OCRBundle\Yandex\YandexRecognizerClient
